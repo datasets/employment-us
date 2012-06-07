@@ -1,0 +1,20 @@
+[DEFAULT]
+name = usa_bls_employment
+version = 20091228
+title = USA Employment status of the civilian noninstitutional population, 1940 to date 
+license = PD
+author = USA Bureau of Labor Statistics
+maintainer = Open Economics
+maintainer_email = info@okfn.org
+notes =  USA Bureau of Labor Statistics: Employment status of the civilian noninstitutional population, 1940 to date 
+ 
+ ### Openness: OPEN
+ 
+   * License: Public Domain (US Federal Government).
+url = http://www.openeconomics.net/store/usa_bls_employment/
+download_url = http://www.openeconomics.net/store/usa_bls_employment/data
+donwload_url_source = http://knowledgeforge.net/econ/hg/file/tip/econdata/bls/usa_bls_employment/
+source = USA Bureau of Labor Statistics Employment Related Data: <ftp://ftp.bls.gov/pub/special.requests/lf/aat1.txt>
+comments = (Numbers in thousands)
+tags = country-us gov employment economics statistics
+
