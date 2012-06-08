@@ -106,6 +106,27 @@ def execute():
     # parser.download()
     outfns = parser.make_csv()
 
+def datahub():
+    import logging
+    logging.basicConfig(level=logging.DEBUG)
+    url = 'http://datahub.io/dataset/us-employment-bls/resource/c3ade464-11cb-46b4-9181-27bb9505bf3d'
+    import ckanclient.datastore
+    ds = ckanclient.datastore.DataStoreClient(url)
+    mapping = {
+        '_id': {
+            'path': 'Year'
+        },
+        'properties': {
+            # 'Year': {
+            #    'type': 'integer'
+            # }
+        }
+    }
+    ds.delete()
+    ds.mapping_update(mapping)
+    ds.upload('data/aat1.csv')
+
 if __name__ == '__main__':
-    execute()
+    # execute()
+    datahub()
 
