@@ -1,5 +1,4 @@
-Year,Civilian noninstitutional population,Civilian labor force (Total),% of Population,Employed Total,% of Population,(of which) Agriculture,(of which) Non-Agriculture,Unemployed (Number),% of labor force,Not in labor force,Footnotes
-1940,99840,55640,55.7,47520,47.6,9540,37980,8120,14.6,44200,
+Year,Civilian noninstitutional population,Civilian labor force (Total),% of Population,Employed Total,Employed % of Population,(of which) Agriculture,(of which) Non-Agriculture,Unemployed (Number),Unemployed % of labor force,Not in labor force,Footnotes
 1941,99900,55910,56.0,50350,50.4,9100,41250,5560,9.9,43990,
 1942,98640,56410,57.2,53750,54.5,9250,44500,2660,4.7,42230,
 1943,94640,55540,58.7,54470,57.6,9080,45390,1070,1.9,39100,
@@ -69,3 +68,5 @@ Year,Civilian noninstitutional population,Civilian labor force (Total),% of Popu
 2006,228815,151428,66.2,144427,63.1,2206,142221,7001,4.6,77387,1
 2007,231867,153124,66.0,146047,63.0,2095,143952,7078,4.6,78743,1
 2008,233788,154287,66.0,145362,62.2,2168,143194,8924,5.8,79501,1
+2009,235801,154142,65.4,139877,59.3,2103,137775,14265,9.3,81659,1
+2010,237830,153889,64.7,139064,58.5,2206,136858,14825,9.6,83941,1

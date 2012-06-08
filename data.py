@@ -2,10 +2,7 @@ import os
 import re
 import csv
 import shutil
-
-import swiss
-cache = swiss.Cache('cache')
-
+import urllib
 
 class Parser(object):
     space = re.compile(r'\s\s+')
@@ -13,18 +10,18 @@ class Parser(object):
         'Year',
         'Civilian noninstitutional population',
         'Civilian labor force (Total)', '% of Population',
-        'Employed Total', '% of Population',
+        'Employed Total', 'Employed % of Population',
         '(of which) Agriculture', '(of which) Non-Agriculture',
-        'Unemployed (Number)', '% of labor force', 'Not in labor force',
-        'Footnotes',
+        'Unemployed (Number)', 'Unemployed % of labor force', 'Not in labor force',
+        'Footnotes'
         ]
-    urls = ['ftp://ftp.bls.gov/pub/special.requests/lf/aat1.txt',
+    urls = ['ftp://ftp.bls.gov/pub/special.requests/lf/aa2010/aat1.txt',
+            # 'ftp://ftp.bls.gov/pub/special.requests/lf/aat1.txt',
             # 'ftp://ftp.bls.gov/pub/special.requests/lf/aat2.txt'
             ]
 
     def download(self):
-        for url in self.urls:
-            cache.retrieve(url)
+        urllib.urlretrieve(self.urls[0], 'cache/aat1.txt')
 
     def get_row(self, line, minimum_number_of_columns=3):
         # need 2 or more spaces!
@@ -60,7 +57,7 @@ class Parser(object):
             if count == title_line:
                 title = line
             if count in value_range:
-                print line
+                # print line
                 row = self.get_row(line)
                 # remove blank lines
                 if row:
@@ -86,10 +83,10 @@ class Parser(object):
     def make_csv(self):
         outfns = []
         for url in Parser.urls:
-            fn = cache.retrieve(url)
-            fo = file(fn)
+            fn = url.split('/')[-1]
+            fo = file(os.path.join('cache', fn))
             title, rows, fns = self.parse_1(fo)
-            csvfn = fn[:-3] + 'csv'
+            csvfn = os.path.join('data', fn[:-3] + 'csv')
             outfns.append(csvfn)
             csvfo = file(csvfn , 'w')
             writer = csv.writer(csvfo)
@@ -97,23 +94,18 @@ class Parser(object):
             for row in rows:
                 writer.writerow(row)
             csvfo.close()
-            print 'CSV file %s written ok' % csvfn
-            print 'Title: ', title
-            print 'Footnotes: ', fns
+            print 'CSV file written ok: %s' % csvfn
         return outfns
 
 def execute():
+    if not os.path.exists('cache'):
+        os.makedirs('cache')
+    if not os.path.exists('data'):
+        os.makedirs('data')
     parser = Parser()
+    # parser.download()
     outfns = parser.make_csv()
-    src = outfns[0]
-    dest = os.path.join(os.path.dirname('__file__'), 'data.csv')
-    print 'Copying: %s to %s' % (src, dest)
-    shutil.copy(src, dest)
 
 if __name__ == '__main__':
     execute()
 
-    # fn = 'aat1.txt'
-    # fo = file(fn)
-    # title, rows, fns = parse_1(fo)
-    # print title, fns, rows
