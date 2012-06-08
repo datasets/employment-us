@@ -1,0 +1,33 @@
+{
+  "author": "USA Bureau of Labor Statistics", 
+  "author_email": "", 
+  "download_url": "", 
+  "extras": {
+    "temporal": "start=1940;"
+  }, 
+  "id": "", 
+  "license_id": "odc-pddl", 
+  "maintainer": "Rufus Pollock", 
+  "maintainer_email": "rufus.pollock@okfn.org", 
+  "name": "us-employment-bls", 
+  "notes": "", 
+  "relationships": "", 
+  "resources": [
+    {
+      "url": "https://raw.github.com/datasets/us-employment-bls/master/data/aat1.csv",
+      "name": "CSV file (derived)",
+      "format": "csv",
+      "mimetype": "text/csv"
+    },
+    {
+      "url": "ftp://ftp.bls.gov/pub/special.requests/lf/aa2010/aat1.txt",
+      "name": "Source file from BLS (human readable plain text)",
+      "format": "text",
+      "mimetype": "text/plain"
+    }
+  ], 
+  "tags": ["economics", "country.us", "unemployment", "time series", "employment", "bls", "topic.economics"], 
+  "title": "US Employment and Unemployment rates since 1940", 
+  "url": "", 
+  "version": ""
+}
