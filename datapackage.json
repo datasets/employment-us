@@ -15,13 +15,92 @@
   "resources": [
     {
       "url": "https://raw.github.com/datasets/us-employment-bls/master/data/aat1.csv",
-      "name": "CSV file (derived)",
+      "name": "aat1",
+      "path": "data/aat1.csv",
+      "title": "CSV file (derived)",
       "format": "csv",
-      "mimetype": "text/csv"
+      "mimetype": "text/csv",
+      "schema": {
+        "fields": [
+            {
+                "name": "year",
+                "title": "Year",
+                "analytical_type": "ordinal",
+                "type": "string"
+            },
+            {
+                "name": "population",
+                "title": "Civilian noninstitutional population",
+                "analytical_type": "measure",
+                "type": "integer"
+            },
+            {
+                "name": "labor_force",
+                "title": "Civilian labor force (Total)",
+                "analytical_type": "measure",
+                "type": "string"
+            },
+            {
+                "name": "population_percent",
+                "title": "% of Population",
+                "analytical_type": "measure",
+                "type": "number"
+            },
+            {
+                "name": "employed_total",
+                "title": "Employed Total",
+                "analytical_type": "measure",
+                "type": "number"
+            },
+            {
+                "name": "employed_percent",
+                "title": "Employed % of Population",
+                "analytical_type": "measure",
+                "type": "number"
+            },
+            {
+                "name": "agrictulture_ratio",
+                "title": "(of which) Agriculture",
+                "analytical_type": "measure",
+                "type": "number"
+            },
+            {
+                "name": "nonagriculture_ratio",
+                "title": "(of which) Non-Agriculture",
+                "analytical_type": "measure",
+                "type": "number"
+            },
+            {
+                "name": "unemployed",
+                "title": "Unemployed (Number)",
+                "analytical_type": "measure",
+                "type": "integer"
+            },
+            {
+                "name": "uneployed_percent",
+                "title": "Unemployed % of labor force",
+                "analytical_type": "measure",
+                "type": "number"
+            },
+            {
+                "name": "not_in_labor",
+                "title": "Not in labor force",
+                "analytical_type": "measure",
+                "type": "integer"
+            },
+            {
+                "name": "footnotes",
+                "title": "Footnotes",
+                "analytical_type": "measure",
+                "type": "string"
+            }
+        ]
+      }
     },
     {
       "url": "ftp://ftp.bls.gov/pub/special.requests/lf/aa2010/aat1.txt",
-      "name": "Source file from BLS (human readable plain text)",
+      "name": "aat1_src",
+      "title": "Source file from BLS (human readable plain text)",
       "format": "text",
       "mimetype": "text/plain"
     }
