@@ -98,7 +98,7 @@
       }
     },
     {
-      "url": "ftp://ftp.bls.gov/pub/special.requests/lf/aa2010/aat1.txt",
+      "url": "http://www.bls.gov/cps/aa2010/aat1.txt",
       "name": "aat1_src",
       "title": "Source file from BLS (human readable plain text)",
       "format": "text",
