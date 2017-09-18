@@ -102,7 +102,8 @@
       "name": "aat1_src",
       "title": "Source file from BLS (human readable plain text)",
       "format": "text",
-      "mimetype": "text/plain"
+      "mimetype": "text/plain",
+      "path": "archive/aat1.txt"
     }
   ], 
   "tags": ["economics", "country.us", "unemployment", "time series", "employment", "bls", "topic.economics"], 
