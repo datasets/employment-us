@@ -115,6 +115,29 @@
     "bls",
     "topic.economics"
   ],
+  "views": [
+    {
+      "name": "graph",
+      "title": "US Employment and Unemployment rates since 1940",
+      "specType": "simple",
+      "spec": {
+        "type": "column",
+        "group": "year",
+        "series": [
+          "population",
+          "employed_total",
+          "unemployed"
+        ]
+      }
+    }
+  ],
+  "sources":[
+    {
+      "name": "country-us gov employment economics statistics",
+      "web": "ftp://ftp.bls.gov/pub/special.requests/lf/aat1.txt",
+      "title": "country-us gov employment economics statistics"
+    }
+  ],
   "title": "US Employment and Unemployment rates since 1940",
   "url": "",
   "version": ""
