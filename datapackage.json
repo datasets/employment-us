@@ -1,19 +1,6 @@
 {
-  "author": "USA Bureau of Labor Statistics",
-  "author_email": "",
-  "download_url": "",
-  "extras": [
-    {
-      "temporal": "start=1940;"
-    }
-  ],
-  "id": "",
-  "license_id": "odc-pddl",
-  "maintainer": "Rufus Pollock",
-  "maintainer_email": "rufus.pollock@okfn.org",
-  "name": "us-employment-bls",
-  "notes": "",
-  "relationships": "",
+  "name": "us-employment",
+  "title": "US Employment and Unemployment rates since 1940",
   "resources": [
     {
       "name": "aat1",
@@ -21,89 +8,81 @@
       "title": "CSV file (derived)",
       "format": "csv",
       "mimetype": "text/csv",
+      "sources": [
+        {
+          "name": "aat1_src",
+          "title": "Source file from BLS (human readable plain text)",
+          "web": "ftp://ftp.bls.gov/pub/special.requests/lf/aat1.txt",
+          "format": "text",
+          "mimetype": "text/plain",
+          "path": "archive/aat1.txt"
+        }
+      ],
       "schema": {
         "fields": [
           {
             "name": "year",
             "title": "Year",
-            "analytical_type": "ordinal",
-            "type": "string"
+            "type": "date",
+            "format": "any"
           },
           {
             "name": "population",
             "title": "Civilian noninstitutional population",
-            "analytical_type": "measure",
             "type": "integer"
           },
           {
             "name": "labor_force",
             "title": "Civilian labor force (Total)",
-            "analytical_type": "measure",
             "type": "string"
           },
           {
             "name": "population_percent",
             "title": "% of Population",
-            "analytical_type": "measure",
             "type": "number"
           },
           {
             "name": "employed_total",
             "title": "Employed Total",
-            "analytical_type": "measure",
             "type": "number"
           },
           {
             "name": "employed_percent",
             "title": "Employed % of Population",
-            "analytical_type": "measure",
             "type": "number"
           },
           {
             "name": "agrictulture_ratio",
             "title": "(of which) Agriculture",
-            "analytical_type": "measure",
             "type": "number"
           },
           {
             "name": "nonagriculture_ratio",
             "title": "(of which) Non-Agriculture",
-            "analytical_type": "measure",
             "type": "number"
           },
           {
             "name": "unemployed",
             "title": "Unemployed (Number)",
-            "analytical_type": "measure",
             "type": "integer"
           },
           {
-            "name": "uneployed_percent",
+            "name": "unemployed_percent",
             "title": "Unemployed % of labor force",
-            "analytical_type": "measure",
             "type": "number"
           },
           {
             "name": "not_in_labor",
             "title": "Not in labor force",
-            "analytical_type": "measure",
             "type": "integer"
           },
           {
             "name": "footnotes",
             "title": "Footnotes",
-            "analytical_type": "measure",
             "type": "string"
           }
         ]
       }
-    },
-    {
-      "name": "aat1_src",
-      "title": "Source file from BLS (human readable plain text)",
-      "format": "text",
-      "mimetype": "text/plain",
-      "path": "archive/aat1.txt"
     }
   ],
   "tags": [
@@ -115,10 +94,34 @@
     "bls",
     "topic.economics"
   ],
+  "licenses": [
+    {
+      "id": "odc-pddl",
+      "label": "Open Data Commons Public Domain Dedication and Licence (PDDL)",
+      "url": "http://opendatacommons.org/licenses/pddl/"
+    }
+  ],
+  "sources":[
+    {
+      "name": "country-us gov employment economics statistics",
+      "title": "country-us gov employment economics statistics"
+    }
+  ],
+  "contributors": [
+    {
+      "title": "Rufus Pollock",
+      "email": "rufus.pollock@okfn.org",
+       "role": "maintainer"
+    },
+    {
+      "title": "USA Bureau of Labor Statistics",
+      "role": "author"
+    }
+  ],
   "views": [
     {
       "name": "graph",
-      "title": "US Employment and Unemployment rates since 1940",
+      "title": "US population, total employment and unemployment since 1940",
       "specType": "simple",
       "spec": {
         "type": "column",
@@ -129,16 +132,18 @@
           "unemployed"
         ]
       }
-    }
-  ],
-  "sources":[
+    },
     {
-      "name": "country-us gov employment economics statistics",
-      "web": "ftp://ftp.bls.gov/pub/special.requests/lf/aat1.txt",
-      "title": "country-us gov employment economics statistics"
+      "name": "graph",
+      "title": "US unemployment rates since 1940",
+      "specType": "simple",
+      "spec": {
+        "type": "column",
+        "group": "year",
+        "series": [
+          "unemployed_percent"
+        ]
+      }
     }
-  ],
-  "title": "US Employment and Unemployment rates since 1940",
-  "url": "",
-  "version": ""
+  ]
 }

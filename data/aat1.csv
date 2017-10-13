@@ -1,4 +1,4 @@
-year,population,labor_force,population_percent,employed_total,employed_percent,agrictulture_ratio,nonagriculture_ratio,unemployed,uneployed_percent,not_in_labor,footnotes
+year,population,labor_force,population_percent,employed_total,employed_percent,agrictulture_ratio,nonagriculture_ratio,unemployed,unemployed_percent,not_in_labor,footnotes
 1941,99900,55910,56.0,50350,50.4,9100,41250,5560,9.9,43990,
 1942,98640,56410,57.2,53750,54.5,9250,44500,2660,4.7,42230,
 1943,94640,55540,58.7,54470,57.6,9080,45390,1070,1.9,39100,

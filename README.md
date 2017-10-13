@@ -6,13 +6,13 @@ Bureau of Labor Statistics.
 
 Numbers are in thousands.
  
-## License
+### Licenses
  
 As US Federal Government data can assume Public Domain. Maintainer licenses any
 additional rights from processing and structuring under Public Domain
 Dedication and License.
 
-## Sources
+### Sources
 
 US Employment and Unemployment rates since 1940 From the [USA Bureau of Labor Statistics Employment Related Data][faq]
 
