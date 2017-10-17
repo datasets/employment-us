@@ -23,8 +23,7 @@
           {
             "name": "year",
             "title": "Year",
-            "type": "date",
-            "format": "any"
+            "type": "year"
           },
           {
             "name": "population",
