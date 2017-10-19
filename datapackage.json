@@ -99,9 +99,9 @@
   ],
   "licenses": [
     {
-      "id": "odc-pddl",
-      "label": "Open Data Commons Public Domain Dedication and Licence (PDDL)",
-      "url": "http://opendatacommons.org/licenses/pddl/"
+      "name": "odc-pddl",
+      "title": "Open Data Commons Public Domain Dedication and Licence (PDDL)",
+      "path": "http://opendatacommons.org/licenses/pddl/"
     }
   ],
   "contributors": [
