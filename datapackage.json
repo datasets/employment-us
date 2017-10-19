@@ -1,6 +1,12 @@
 {
   "name": "employment-us",
   "title": "US Employment and Unemployment rates since 1940",
+  "sources":[
+    {
+      "title": "country-us gov employment economics statistics",
+      "path": "https://www.bls.gov/cps/cpsaat01.htm"
+    }
+  ],
   "resources": [
     {
       "name": "aat1",
@@ -10,9 +16,7 @@
       "mimetype": "text/csv",
       "sources": [
         {
-          "name": "aat1_src",
-          "title": "Source file from BLS (human readable plain text)",
-          "web": "ftp://ftp.bls.gov/pub/special.requests/lf/aat1.txt",
+          "title": "Sodurce file from BLS (human readable plain text)",
           "format": "text",
           "mimetype": "text/plain",
           "path": "archive/aat1.txt"
@@ -98,12 +102,6 @@
       "id": "odc-pddl",
       "label": "Open Data Commons Public Domain Dedication and Licence (PDDL)",
       "url": "http://opendatacommons.org/licenses/pddl/"
-    }
-  ],
-  "sources":[
-    {
-      "name": "country-us gov employment economics statistics",
-      "title": "country-us gov employment economics statistics"
     }
   ],
   "contributors": [
