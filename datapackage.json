@@ -118,6 +118,18 @@
   "views": [
     {
       "name": "graph",
+      "title": "US unemployment rates since 1940",
+      "specType": "simple",
+      "spec": {
+        "type": "column",
+        "group": "year",
+        "series": [
+          "unemployed_percent"
+        ]
+      }
+    },
+    {
+      "name": "graph",
       "title": "US population, total employment and unemployment since 1940",
       "specType": "simple",
       "spec": {
@@ -127,18 +139,6 @@
           "population",
           "employed_total",
           "unemployed"
-        ]
-      }
-    },
-    {
-      "name": "graph",
-      "title": "US unemployment rates since 1940",
-      "specType": "simple",
-      "spec": {
-        "type": "column",
-        "group": "year",
-        "series": [
-          "unemployed_percent"
         ]
       }
     }
