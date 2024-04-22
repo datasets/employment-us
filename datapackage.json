@@ -118,6 +118,7 @@
   "views": [
     {
       "name": "graph",
+      "resources": ["aat1"],
       "title": "US unemployment rates since 1940",
       "specType": "simple",
       "spec": {
@@ -130,6 +131,7 @@
     },
     {
       "name": "graph",
+      "resources": ["aat1"],
       "title": "US population, total employment and unemployment since 1940",
       "specType": "simple",
       "spec": {
