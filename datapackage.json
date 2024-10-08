@@ -32,7 +32,7 @@
           {
             "name": "population",
             "title": "Civilian noninstitutional population",
-            "type": "integer"
+            "type": "number"
           },
           {
             "name": "labor_force",
@@ -67,7 +67,7 @@
           {
             "name": "unemployed",
             "title": "Unemployed (Number)",
-            "type": "integer"
+            "type": "number"
           },
           {
             "name": "unemployed_percent",
@@ -77,7 +77,7 @@
           {
             "name": "not_in_labor",
             "title": "Not in labor force",
-            "type": "integer"
+            "type": "number"
           },
           {
             "name": "footnotes",
