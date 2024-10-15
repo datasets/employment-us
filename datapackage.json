@@ -1,7 +1,7 @@
 {
   "name": "employment-us",
   "title": "US Employment and Unemployment rates since 1940",
-  "sources":[
+  "sources": [
     {
       "title": "country-us gov employment economics statistics",
       "path": "https://www.bls.gov/cps/cpsaat01.htm"
@@ -108,7 +108,7 @@
     {
       "title": "Rufus Pollock",
       "email": "rufus.pollock@okfn.org",
-       "role": "maintainer"
+      "role": "maintainer"
     },
     {
       "title": "USA Bureau of Labor Statistics",
@@ -118,7 +118,9 @@
   "views": [
     {
       "name": "graph",
-      "resources": ["aat1"],
+      "resources": [
+        "aat1"
+      ],
       "title": "US unemployment rates since 1940",
       "specType": "simple",
       "spec": {
@@ -131,7 +133,9 @@
     },
     {
       "name": "graph",
-      "resources": ["aat1"],
+      "resources": [
+        "aat1"
+      ],
       "title": "US population, total employment and unemployment since 1940",
       "specType": "simple",
       "spec": {
@@ -144,5 +148,6 @@
         ]
       }
     }
-  ]
+  ],
+  "collection": "economic-data"
 }
