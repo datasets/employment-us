@@ -1,132 +1,79 @@
 import os
-import re
-import csv
-import shutil
-import urllib
+import requests
+from bs4 import BeautifulSoup
 
-class Parser(object):
-    space = re.compile(r'\s\s+')
-    headings = [
-        'Year',
-        'Civilian noninstitutional population',
-        'Civilian labor force (Total)', '% of Population',
-        'Employed Total', 'Employed % of Population',
-        '(of which) Agriculture', '(of which) Non-Agriculture',
-        'Unemployed (Number)', 'Unemployed % of labor force', 'Not in labor force',
-        'Footnotes'
-        ]
-    urls = ['ftp://ftp.bls.gov/pub/special.requests/lf/aa2010/aat1.txt',
-            # 'ftp://ftp.bls.gov/pub/special.requests/lf/aat1.txt',
-            # 'ftp://ftp.bls.gov/pub/special.requests/lf/aat2.txt'
-            ]
-
-    def download(self):
-        urllib.urlretrieve(self.urls[0], 'cache/aat1.txt')
-
-    def get_row(self, line, minimum_number_of_columns=3):
-        # need 2 or more spaces!
-        row = self.space.split(line)
-        if len(row) <= minimum_number_of_columns:
-            return None
-        # clean up first row (what do we do about footnotes)
-        row[0] = row[0].replace('.', '')
-        # extract fn
-        # either yyyy (fn) or just yyyy
-        out = row[0].split()
-        if len(out) == 2:
-            fn = out[1][1:-1]
-        else:
-            fn = ''
-        row[0] = out[0]
-        row.append(fn)
-        row[1:-1] = [ xx.replace(',', '') for xx in row[1:-1] ]
-        return row
-
-    def parse_file(self, fo, title_line, value_range, footnote_range=[]):
-        count = -1
-        title = ''
-        headings = []
-        rows = []
-        fns = []
-        for line in fo:
-            count += 1
-            line = line.strip()
-            # skip blank lines
-            if not line: continue
-            # not the same line in every file!!
-            if count == title_line:
-                title = line
-            if count in value_range:
-                # print line
-                row = self.get_row(line)
-                # remove blank lines
-                if row:
-                    rows.append(row)
-            if count in footnote_range:
-                # More hacking because fns can spill over multiple lines
-                # Assume never more than five fns
-                # TODO make this more robust ...
-                if line and line[0] in ['1', '2', '3', '4', '5' ]:
-                    fns.append(line)
-                else:
-                    fns[-1] += ' ' + line
-        return title, rows, fns
-
-    # TODO: col titles (a complete mess ...)
-    def parse_1(self, fo):
-        comments = 'Persons 14 years of age and over 1940-1947, Persons 16 years of age and over 1948 onwards'
-        return self.parse_file(fo, 5, range(22, 103), [103, 104])
-
-    def parse_2(self, fo):
-        return self.parse_file(fo, 3, range(20, 103), [103])
-
-    def make_csv(self):
-        outfns = []
-        for url in Parser.urls:
-            fn = url.split('/')[-1]
-            fo = file(os.path.join('cache', fn))
-            title, rows, fns = self.parse_1(fo)
-            csvfn = os.path.join('data', fn[:-3] + 'csv')
-            outfns.append(csvfn)
-            csvfo = file(csvfn , 'w')
-            writer = csv.writer(csvfo)
-            writer.writerow(self.headings)
-            for row in rows:
-                writer.writerow(row)
-            csvfo.close()
-            print 'CSV file written ok: %s' % csvfn
-        return outfns
-
-def execute():
-    if not os.path.exists('cache'):
-        os.makedirs('cache')
-    if not os.path.exists('data'):
-        os.makedirs('data')
-    parser = Parser()
-    # parser.download()
-    outfns = parser.make_csv()
-
-def datahub():
-    import logging
-    logging.basicConfig(level=logging.DEBUG)
-    url = 'http://datahub.io/dataset/us-employment-bls/resource/c3ade464-11cb-46b4-9181-27bb9505bf3d'
-    import ckanclient.datastore
-    ds = ckanclient.datastore.DataStoreClient(url)
-    mapping = {
-        '_id': {
-            'path': 'Year'
-        },
-        'properties': {
-            # 'Year': {
-            #    'type': 'integer'
-            # }
+class Regular:
+    def __init__(self):
+        self.url = 'https://www.bls.gov/cps/cpsaat01.htm'
+        self.headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Connection': 'keep-alive',
+            'Upgrade-Insecure-Requests': '1',
+            'Sec-Fetch-Dest': 'document',
+            'Sec-Fetch-Mode': 'navigate',
+            'Sec-Fetch-Site': 'none',
+            'Sec-Fetch-User': '?1'
         }
-    }
-    ds.delete()
-    ds.mapping_update(mapping)
-    ds.upload('data/aat1.csv')
+        self.data = []
+
+    def parse_bls(self):
+        try:
+            response = requests.get(self.url, headers=self.headers, timeout=30)
+            response.raise_for_status()
+            
+            soup = BeautifulSoup(response.text, 'html.parser')
+            table = soup.find('table', {'id':'cps_eeann_year'})
+            
+            if table is None:
+                print("Available table IDs:")
+                for t in soup.find_all('table'):
+                    print(f"- {t.get('id', 'no-id')}")
+                raise ValueError(f"Could not find table with id 'cps_eeann_year' at {self.url}")
+            
+            tbody = table.find('tbody') or table
+            
+            for row in tbody.find_all('tr')[1:]:
+                # skip first row since it's a header
+                cells = row.find_all(['th', 'td'])
+                # check if first row's year is more than 2010
+                if len(cells) > 0 and int(cells[0].text.strip()) > 2010:
+                    # Parse from 0 to -1 because we want all columns including the last one
+                    # Remove commas and clean the numbers
+                    cleaned_cells = [cell.text.strip().replace(',', '') for cell in cells[:]]
+                    self.data.append(cleaned_cells)
+            
+            if not self.data:
+                raise ValueError("No data was extracted from the table")
+            
+            return self.data
+            
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching data: {e}")
+            print(f"Response status code: {getattr(e.response, 'status_code', 'N/A')}")
+            print(f"Response headers: {getattr(e.response, 'headers', {})}")
+            raise
+
+    def merge_data(self):
+        # Read aat1.csv as a list of lists
+        with open(os.path.join('archive', 'aat1.csv'), 'r') as f:
+            aat1_data = [line.strip().split(',') for line in f.readlines()]
+        
+        header = aat1_data[0]
+        aat1_data = aat1_data[1:]
+
+        # Merge aat1_data and self.data
+        merged_data = [header] + aat1_data + self.data
+        
+        # Write the data into the data folder
+        with open(os.path.join('data', 'aat1.csv'), 'w') as f:
+            for row in merged_data:
+                f.write(','.join(row) + '\n')
+
 
 if __name__ == '__main__':
-    # execute()
-    datahub()
-
+    regular = Regular()
+    regular.parse_bls()
+    regular.merge_data()
